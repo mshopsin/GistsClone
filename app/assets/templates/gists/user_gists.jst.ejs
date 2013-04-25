@@ -1,0 +1,8 @@
+<ul id="gist-list">
+  <% gists.each(function(gist) { %>
+    <li id="gist-item">
+      <%= gist.escape("title") %>
+      <a data-fav="<%= gist.id %>" href="#/fav/<%= gist.id %>">Favorite</a>
+    </li>
+  <% }); %>
+</ul>
