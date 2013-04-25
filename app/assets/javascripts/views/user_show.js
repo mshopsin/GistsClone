@@ -22,11 +22,15 @@ GC.Views.UserShow = Backbone.View.extend({
     );
     that.$el.append( gists.render().$el );
 
-    that.hideFavorites();
+    that.hideFavorites(that.$el);
     return that;
   },
 
-  hideFavorites: function() {
-    $('')
+  hideFavorites: function(el) {
+    GC.Store.UserFavs.each( function(fav) {
+      el.find('*[data-fav=\''  + fav.get("gist_id") + '\']' ).hide();
+      el.find('*[data-hate=\'' + fav.get("gist_id") + '\']' ).show();
+
+    });
   }
 });

@@ -14,7 +14,7 @@ window.GC = {
 
     GC.Store.Users.fetch({
       success: function(){
-        console.log(GC.Store.Users);
+
 
         var router = new GC.Routers.Gist($rootEl);
         Backbone.history.start();

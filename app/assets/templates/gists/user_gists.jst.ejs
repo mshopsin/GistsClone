@@ -2,7 +2,15 @@
   <% gists.each(function(gist) { %>
     <li id="gist-item">
       <%= gist.escape("title") %>
-      <a data-fav="<%= gist.id %>" href="#/fav/<%= gist.id %>">Favorite</a>
+      <a class="fav-buttons" data-fav="<%= gist.id %>"
+        href="#/fav/<%= gist.id %>">
+        Like
+      </a>
+      <a class="hate-buttons" data-hate="<%= gist.id %>"
+        style="display: none;"
+        href="#/fav_destroy/<%= gist.id %>">
+        Hate
+      </a>
     </li>
   <% }); %>
 </ul>

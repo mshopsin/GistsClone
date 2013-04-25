@@ -1,9 +1,10 @@
 GistClone::Application.routes.draw do
   resources :users do
     resources :gists
-    resources :favorites, only: [:create, :destroy]
+    resources :favorites, only: [:index, :create, :destroy]
   end
   resources :sessions
+  resources :favorites, only: [:create, :destroy]
   get "/signin", to: "sessions#new"
   delete "/signout", to: "sessions#destroy"
   resources :gists, :only => [:index]
