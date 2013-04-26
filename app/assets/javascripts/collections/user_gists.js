@@ -6,7 +6,7 @@ GC.Collections.UserGists = Backbone.Collection.extend({
   },
 
   url: function() {
-    return "/users/" + this.user_id + "/gists";
+    return "/users/0/gists";
   }
 
 });

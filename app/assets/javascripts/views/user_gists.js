@@ -11,7 +11,6 @@ GC.Views.UserGists = Backbone.View.extend({
 
   render: function() {
     var that = this;
-    console.log(that.collection);
     var renderedContent = JST["gists/user_gists"]({
       gists: that.collection
     });

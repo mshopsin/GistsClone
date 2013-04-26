@@ -1,6 +1,6 @@
 GistClone::Application.routes.draw do
   resources :users do
-    resources :gists
+    resources :gists, only: [:index, :create, :destroy]
     resources :favorites, only: [:index, :create, :destroy]
   end
   resources :sessions

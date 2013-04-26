@@ -6,7 +6,7 @@ GC.Collections.UserFavs = Backbone.Collection.extend({
   },
 
   url: function() {
-    return "/users/" + this.user_id + "/favorites";
+    return "/users/0/favorites";
   }
 
 });

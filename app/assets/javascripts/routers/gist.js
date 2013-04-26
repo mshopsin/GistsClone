@@ -1,7 +1,7 @@
 GC.Routers.Gist = Backbone.Router.extend({
   routes: {
+    "users": "userShow",
     "": "newSession",
-    "users/:id": "userShow",
     "fav/:id" : "createFav",
     "fav_destroy/:id" : "destroyFav"
   },
@@ -51,7 +51,8 @@ GC.Routers.Gist = Backbone.Router.extend({
 
         GC.Store.UserFavs.fetch({
           success: function() {
-            Backbone.history.navigate("#/users/" + window.sessionToken);
+            console.log("fetch");
+            Backbone.history.navigate("#/users");
           }
         });
       }
@@ -60,13 +61,20 @@ GC.Routers.Gist = Backbone.Router.extend({
 
   userShow: function() {
     var that = this;
-    if(typeof window.sessionToken == 'undefined'){
-      Backbone.history.navigate("#/");
-    } else {
-      var user = GC.Store.Users.get(window.sessionToken);
-      var userView = new GC.Views.UserShow(user);
-      that.$rootEl.html(userView.render().$el);
-    }
+    // if(typeof window.sessionToken == 'undefined'){
+ //      Backbone.history.navigate("#/");
+ //    } else {
+
+      GC.Store.Users.fetch({
+        success: function (coll) {
+          var user = coll.first();
+          var userView = new GC.Views.UserShow({
+            model: user
+          });
+          that.$rootEl.html(userView.render().$el);
+        }
+      });
+    // }
   },
 
   createFav: function(id) {
@@ -83,15 +91,15 @@ GC.Routers.Gist = Backbone.Router.extend({
        }
     });
 
-    Backbone.history.navigate("#/users/" + window.sessionToken);
+    Backbone.history.navigate("#/users");
   },
 
   destroyFav: function(id) {
     console.log(id);
    // this.removal_id = id;
-    console.log(GC.Store.UserFavs);
+    console.log(GC.Store.UserFavs.where({gist_id: id}));
     var favModel = GC.Store.UserFavs.where({gist_id: id})[0].destroy();
-    // console.log(favModel);
+     console.log(favModel);
  //    favModel[0].destroy( {
  //      success: function(model, response) {
  //        console.log(GC.Store.UserFavs);

@@ -1,8 +1,8 @@
 class FavoritesController < ApplicationController
   def index
-    if params[:user_id]
+    if session[:remember_token]
       #@gists = Gist.where("user_id = ?", params[:user_id])
-      @favs = User.find(params[:user_id]).favorites
+      @favs = User.find(session[:remember_token]).favorites
     else
       @favs = Favorite.all
     end
@@ -12,7 +12,7 @@ class FavoritesController < ApplicationController
 
   def create
     @favorite = Favorite.new(
-      gist_id: params[:gist_id], user_id: current_user.id
+      gist_id: params[:gist_id], user_id: session[:remember_token]
     )
     if @favorite.save
       render json: @favorite
@@ -23,7 +23,7 @@ class FavoritesController < ApplicationController
 
   def destroy
     @fav = Favorite.find(params[:id])
-    if @fav.user_id == current_user.id
+    if @fav.user_id ==  session[:remember_token]
       if @fav.destroy
         render json: { status: "successful deletion" }
       else

@@ -4,13 +4,14 @@ class GistsController < ApplicationController
  #    session[:remember_token], params[:user_id]
  #    )}
 
+  #@gists = Gist.where("user_id = ?", params[:user_id])
+
   def index
-    if params[:user_id]
-      #@gists = Gist.where("user_id = ?", params[:user_id])
-      @gists = User.find(params[:user_id]).gists
-    else
-      @gists = Gist.all
-    end
+    # if  params[:user_id]
+ #      @gists = User.find(session[:remember_token]).gists
+ #    else
+    @gists = Gist.all
+    # end
 
     render json: @gists
   end

@@ -4,3 +4,10 @@
 
 <div id="content">
 </div>
+<script type="text/javascript">
+
+  var GC.Store.UserGists = <%= Favorite.all.to_json.html_safe %>
+  var GC.Store.Gists = <%= Gist.all.to_json.html_safe %>
+  var user = <%= User.find(session[:remember_token]).to_json.html_safe %>
+
+</script>
